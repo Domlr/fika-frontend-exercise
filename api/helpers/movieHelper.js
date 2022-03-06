@@ -8,6 +8,6 @@ export default function cleanMovieObject(movie) {
   delete movie.vote_average;
   delete movie.vote_count;
   delete movie.original_title;
-  delete movie.backdrop_path
+  delete movie.backdrop_path;
   return movie;
 }

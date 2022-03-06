@@ -1,28 +1,35 @@
-import React, { Component } from 'react';
-import { SafeAreaView, Text, FlatList, View, Image, ActivityIndicator } from 'react-native';
-import { styles } from '../styles/movieListStyle';
-import fetchMovies from '../api/movieApi';
-import fetchGenres from '../api/genresApi';
+import React, { Component } from "react";
+import {
+  SafeAreaView,
+  Text,
+  FlatList,
+  View,
+  Image,
+  ActivityIndicator,
+} from "react-native";
+import { styles } from "../styles/movieListStyle";
+import fetchMovies from "../api/movieApi";
+import fetchGenres from "../api/genresApi";
 
 class MovieList extends Component {
   state = {
     movies: [],
-    loading: true
-  }
+    loading: true,
+  };
 
   async componentDidMount() {
     try {
       const movies = await fetchMovies();
       const genres = await fetchGenres();
 
-      let formattedMovies = {...movies};
+      let formattedMovies = { ...movies };
       formattedMovies = Object.values(formattedMovies);
 
-      formattedMovies.forEach(movie => {
-        const movieGenres = movie.genre_ids.map(genre => {
-          const genreString = genres.find(g => g.id === genre);
+      formattedMovies.forEach((movie) => {
+        const movieGenres = movie.genre_ids.map((genre) => {
+          const genreString = genres.find((g) => g.id === genre);
           return genreString;
-        })
+        });
         movie.genres = movieGenres;
         delete movie.genre_ids;
       });
@@ -42,23 +49,26 @@ class MovieList extends Component {
 
     const Item = ({ title, imageUrl }) => (
       <View style={styles.item}>
-        <Image source={{uri: `https://image.tmdb.org/t/p/w500/${imageUrl}`}} style={styles.movieImage}/>
+        <Image
+          source={{ uri: `https://image.tmdb.org/t/p/w500/${imageUrl}` }}
+          style={styles.movieImage}
+        />
         <Text style={styles.title}>{title}</Text>
       </View>
     );
 
-    if(!loading) {
+    if (!loading) {
       return (
         <SafeAreaView style={styles.container}>
-          <FlatList 
+          <FlatList
             data={movies}
             renderItem={renderItem}
-            keyExtractor={item => item.id} 
-            />
+            keyExtractor={(item) => item.id}
+          />
         </SafeAreaView>
-      )
+      );
     } else {
-        return <ActivityIndicator />
+      return <ActivityIndicator />;
     }
   }
 }

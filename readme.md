@@ -7,6 +7,7 @@ You have an hour to complete this. We don't expect you to complete the exercise 
 ## Technical details
 
 ### API
+
 You will need to use the following URLs to fetch the films and genres from `the movie db` API:
 
 movies - [https://api.themoviedb.org/3/movie/now_playing?api_key=d432b933ecc6d5642d8d2befbc40c7ac&language=en-US&page=1](https://developers.themoviedb.org/3/movies/get-now-playing)
