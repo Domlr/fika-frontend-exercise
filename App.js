@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import MovieList from "./components/moviesList";
 
-export default function App() {
+export function App() {
   return (
     <View style={styles.container}>
       <MovieList />
